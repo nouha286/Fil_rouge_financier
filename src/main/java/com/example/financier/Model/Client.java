@@ -1,5 +1,6 @@
 package com.example.financier.Model;
 
+
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -9,27 +10,17 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-public class Role {
+public class Client {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nameRole;
-
-    public Role() {
-
-    }
-
-
-
-
-    public Role(Long id, String nameRole) {
-        this.id = id;
-        this.nameRole = nameRole;
-    }
-
-    public Role(String nameRole) {
-        this.nameRole = nameRole;
-    }
-
+    private String nom;
+    private String CNE;
+    private String email;
+    private String adresse;
+    private String metier;
+    private Etat etat;
 
 }

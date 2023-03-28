@@ -1,4 +1,4 @@
-package com.example.financier.Service.User;
+package com.example.financier.Service;
 
 import com.example.financier.Model.Role;
 import com.example.financier.Model.User;

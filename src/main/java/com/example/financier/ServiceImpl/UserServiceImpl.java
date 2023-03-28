@@ -1,4 +1,4 @@
-package com.example.financier.Service.User;
+package com.example.financier.ServiceImpl;
 
 
 import com.example.financier.Model.Role;
@@ -6,6 +6,7 @@ import com.example.financier.Model.User;
 import com.example.financier.Repository.RoleRepository;
 import com.example.financier.Repository.UserRepository;
 
+import com.example.financier.Service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
