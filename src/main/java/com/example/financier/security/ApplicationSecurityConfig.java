@@ -41,18 +41,18 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         customAuthenticationFilter.setFilterProcessesUrl("/visionarycrofting/login");
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().antMatchers("/visionarycrofting/login/**").permitAll();
-        http.authorizeRequests().antMatchers(GET,"/visionarycrofting/**").hasAnyAuthority("STOCK_MANAGER");
-        http.authorizeRequests().antMatchers(GET,"/visionarycrofting/Client/**").hasAnyAuthority("STOCK_MANAGER");
-        http.authorizeRequests().antMatchers(POST,"/visionarycrofting/Client/**").hasAnyAuthority("CLIENT");
-        http.authorizeRequests().antMatchers(POST,"/visionarycrofting/Client/passer_commande").hasAnyAuthority("CLIENT");
-        http.authorizeRequests().antMatchers(POST,"/visionarycrofting/Client/addClient").hasAnyAuthority("CLIENT");
-        http.authorizeRequests().antMatchers(PUT,"/visionarycrofting/Provider/validateInvoice/**").hasAnyAuthority("FOURNISSEUR");
-        http.authorizeRequests().antMatchers(POST,"/visionarycrofting/invoice/insert/**").hasAnyAuthority("STOCK_MANAGER");
+     //   http.authorizeRequests().antMatchers("/visionarycrofting/login/**").permitAll();
+      //  http.authorizeRequests().antMatchers(GET,"/visionarycrofting/**").hasAnyAuthority("STOCK_MANAGER");
+      //  http.authorizeRequests().antMatchers(GET,"/visionarycrofting/Client/**").hasAnyAuthority("STOCK_MANAGER");
+     //   http.authorizeRequests().antMatchers(POST,"/visionarycrofting/Client/**").hasAnyAuthority("CLIENT");
+      //  http.authorizeRequests().antMatchers(POST,"/visionarycrofting/Client/passer_commande").hasAnyAuthority("CLIENT");
+      //  http.authorizeRequests().antMatchers(POST,"/visionarycrofting/Client/addClient").hasAnyAuthority("CLIENT");
+       // http.authorizeRequests().antMatchers(PUT,"/visionarycrofting/Provider/validateInvoice/**").hasAnyAuthority("FOURNISSEUR");
+        // http.authorizeRequests().antMatchers(POST,"/visionarycrofting/invoice/insert/**").hasAnyAuthority("STOCK_MANAGER");
 
+        http.authorizeRequests().anyRequest().permitAll();
 
-
-        http.authorizeRequests().anyRequest().authenticated();
+      //  http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CutomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }

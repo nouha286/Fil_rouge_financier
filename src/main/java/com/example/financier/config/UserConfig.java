@@ -6,7 +6,7 @@ package com.example.financier.config;
 import com.example.financier.Model.Role;
 import com.example.financier.Repository.RoleRepository;
 import com.example.financier.Repository.UserRepository;
-import com.example.financier.ServiceImpl.UserServiceImpl;
+import com.example.financier.config.ServiceImpl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package com.example.financier.ServiceImpl;
+package com.example.financier.config.ServiceImpl;
 
 import com.example.financier.DTO.CompteDTO;
 import com.example.financier.Model.Client;
@@ -6,6 +6,7 @@ import com.example.financier.Model.Compte;
 import com.example.financier.Model.Etat;
 import com.example.financier.Repository.ClientRepository;
 import com.example.financier.Repository.CompteRepository;
+import com.example.financier.Service.ClientService;
 import com.example.financier.Service.CompteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class CompteServiceImpl implements CompteService {
     CompteRepository compteRepository;
 
     @Autowired
-    ClientRepository clientRepository;
+    ClientService clientService;
     @Override
     public List<Compte> getAllComptes() {
         return compteRepository.findAll();
@@ -43,12 +44,17 @@ public class CompteServiceImpl implements CompteService {
         compteSaved.setEtat(Etat.refused);
         compteSaved.setSolde(compte.getSolde());
         compteSaved.setDateCreation(LocalDate.now());
-        Optional<Client> client=clientRepository.findById(compte.getId());
-        if(client.isPresent())
-        {
-            return compteRepository.save(compteSaved);
-        }
-        return null;
+        Client client = new Client();
+               client.setNom(compte.getNom());
+               client.setCne(compte.getCne());
+               client.setEmail(compte.getEmail());
+                client.setAdresse(compte.getAdresse());
+                client.setMetier(compte.getMetier());
+
+        Client savedClient = clientService.createClient(client);
+        compteSaved.setClient(savedClient);
+        return compteRepository.save(compteSaved);
+
     }
 
     @Override
@@ -57,7 +63,7 @@ public class CompteServiceImpl implements CompteService {
         if (compteUpdated.isPresent())
         {
             compteUpdated.get().setSolde(compte.getSolde());
-            Optional<Client> client=clientRepository.findById(compte.getId());
+            Optional<Client> client=clientService.getClientById(compte.getId());
             if(client.isPresent()) {
 
                 compteUpdated.get().setClient(client.get());

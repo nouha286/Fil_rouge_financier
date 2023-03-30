@@ -3,7 +3,7 @@ package com.example.financier.Controller;
 
 import com.example.financier.DTO.CompteDTO;
 import com.example.financier.Model.Compte;
-import com.example.financier.ServiceImpl.CompteServiceImpl;
+import com.example.financier.config.ServiceImpl.CompteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,10 +44,7 @@ public class CompteController {
     @PostMapping("/")
     public ResponseEntity<Compte> createCompte(@Valid @RequestBody CompteDTO compte) {
         Compte savedCompte = compteService.createCompte(compte);
-      if (savedCompte==null)
-      {
-          return new ResponseEntity<>(savedCompte, HttpStatus.NOT_FOUND);
-      }
+
         return new ResponseEntity<>(savedCompte, HttpStatus.CREATED);
     }
 
