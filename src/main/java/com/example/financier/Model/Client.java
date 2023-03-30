@@ -12,7 +12,6 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class Client {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

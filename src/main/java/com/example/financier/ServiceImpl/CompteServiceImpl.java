@@ -1,4 +1,4 @@
-package com.example.financier.config.ServiceImpl;
+package com.example.financier.ServiceImpl;
 
 import com.example.financier.DTO.CompteDTO;
 import com.example.financier.Model.Client;

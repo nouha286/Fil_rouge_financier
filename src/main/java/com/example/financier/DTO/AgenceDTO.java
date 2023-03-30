@@ -9,6 +9,5 @@ public class AgenceDTO {
 
     private Long id;
     private String adresse;
-
     private Long responsableId;
 }

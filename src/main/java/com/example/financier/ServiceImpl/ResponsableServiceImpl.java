@@ -1,4 +1,4 @@
-package com.example.financier.config.ServiceImpl;
+package com.example.financier.ServiceImpl;
 
 import com.example.financier.Model.Responsable;
 import com.example.financier.Repository.ResponsableRepository;

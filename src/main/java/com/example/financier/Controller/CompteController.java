@@ -3,7 +3,7 @@ package com.example.financier.Controller;
 
 import com.example.financier.DTO.CompteDTO;
 import com.example.financier.Model.Compte;
-import com.example.financier.config.ServiceImpl.CompteServiceImpl;
+import com.example.financier.ServiceImpl.CompteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
