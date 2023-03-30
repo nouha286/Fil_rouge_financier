@@ -32,7 +32,7 @@ public class AgenceServiceImpl implements AgenceService {
     }
 
     @Override
-    public Agence createOrUpdateAgence(AgenceDTO agence) {
+    public Agence createAgence(AgenceDTO agence) {
 
         Optional<Responsable> responsable=responsableService.getResponsableById(agence.getResponsableId());
         if(responsable.isPresent())

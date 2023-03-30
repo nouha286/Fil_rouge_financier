@@ -10,7 +10,7 @@ public interface AgenceService {
 
     public List<Agence> getAllAgences();
     public Optional<Agence> getAgenceById(Long id);
-    public Agence createOrUpdateAgence(AgenceDTO agence);
+    public Agence createAgence(AgenceDTO agence);
     public Boolean desapproveAgenceById(Long id);
 
     Boolean approveAgenceById(Long id);

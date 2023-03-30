@@ -45,7 +45,7 @@ public class AgenceController {
     @PostMapping
     public ResponseEntity<Agence> createAgence(@RequestBody @Valid AgenceDTO agence) {
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(agenceService.createOrUpdateAgence(agence));
+        return ResponseEntity.status(HttpStatus.CREATED).body(agenceService.createAgence(agence));
     }
 
     @PutMapping("/Approve/{id}")

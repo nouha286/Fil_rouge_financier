@@ -33,4 +33,7 @@ public class Client {
     @NotNull
     private Agence agence;
 
+
+    public Client(){};
+
 }
