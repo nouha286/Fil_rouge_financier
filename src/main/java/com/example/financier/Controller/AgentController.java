@@ -1,9 +1,9 @@
 package com.example.financier.Controller;
 
 
-import com.example.financier.DTO.AgenceDTO;
+
 import com.example.financier.DTO.AgentDTO;
-import com.example.financier.Model.Agence;
+
 import com.example.financier.Model.Agent;
 import com.example.financier.Service.AgentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class AgentController {
 
 
     @GetMapping
-    public ResponseEntity<List<Agent>> getAllAgences() {
+    public ResponseEntity<List<Agent>> getAllAgents() {
         List<Agent> agents = agentService.getAllAgents();
         if (agents.isEmpty()) {
             return ResponseEntity.noContent().build();
@@ -51,11 +51,11 @@ public class AgentController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Agent> updateAgence(@RequestBody @Valid AgentDTO agent) {
-        Agent updatedAgence=agentService.updateAgent(agent);
-        if (updatedAgence!=null) {
+    public ResponseEntity<Agent> updateAgent(@RequestBody @Valid AgentDTO agent) {
+        Agent updatedAgent=agentService.updateAgent(agent);
+        if (updatedAgent!=null) {
 
-            return ResponseEntity.ok(updatedAgence);
+            return ResponseEntity.ok(updatedAgent);
         } else {
             return ResponseEntity.notFound().build();
         }

@@ -1,5 +1,6 @@
 package com.example.financier.ServiceImpl;
 
+import com.example.financier.DTO.ResponsableDto;
 import com.example.financier.Model.Etat;
 import com.example.financier.Model.Responsable;
 import com.example.financier.Repository.ResponsableRepository;
@@ -57,7 +58,16 @@ public class ResponsableServiceImpl implements ResponsableService {
     }
 
     @Override
-    public Responsable updateResponsable(Responsable responsable) {
+    public Responsable updateResponsable(ResponsableDto responsable) {
+        Optional<Responsable> responsableUpdated=responsableRepository.findById(responsable.getId());
+        if (responsableUpdated.isPresent())
+        {
+            if (responsable.getPassword()!=null) responsableUpdated.get().setPassword(responsable.getPassword());
+            if (responsable.getEmail()!=null) responsableUpdated.get().setEmail(responsable.getEmail());
+              if (responsable.getName()!=null) responsableUpdated.get().setName(responsable.getName());
+            return responsableRepository.save(responsableUpdated.get());
+        }
+
         return null;
     }
 

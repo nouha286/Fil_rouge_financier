@@ -87,8 +87,8 @@ public class AgentServiceImpl implements AgentService {
         {
             Agent agent=new Agent();
             agent.setName(agentDTO.getName());
-           agent.setEtat(Etat.refused);
-           agent.setEmail(agentDTO.getEmail());
+            agent.setEtat(Etat.refused);
+            agent.setEmail(agentDTO.getEmail());
             agent.getRoles().add(roleRepository.findById(3L).get());
             agent.setPassword(agentDTO.getPassword());
             agent.setAgence(agence.get());

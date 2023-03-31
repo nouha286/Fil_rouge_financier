@@ -1,6 +1,7 @@
 package com.example.financier.Service;
 
 
+import com.example.financier.DTO.ResponsableDto;
 import com.example.financier.Model.Responsable;
 
 import java.util.List;
@@ -15,5 +16,5 @@ public interface ResponsableService {
     public Boolean desapproveResponsableById(Long id);
 
     Boolean approveResponsableById(Long id);
-    public Responsable updateResponsable(Responsable responsable);
+    public Responsable updateResponsable(ResponsableDto responsable);
 }
