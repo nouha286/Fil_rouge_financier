@@ -27,8 +27,8 @@ class _HomePageState extends State<HomePage> {
       'route': '/credit',
     },
     {
-      'title': 'Client',
-      'route': '/client',
+      'title': 'Compte',
+      'route': '/compte',
     },
     {
       'title': 'Opération',

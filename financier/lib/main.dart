@@ -1,4 +1,9 @@
+import 'package:financier/Pages/AgentPage.dart';
+import 'package:financier/Pages/ComptePage.dart';
+import 'package:financier/Pages/CreditPage.dart';
 import 'package:financier/Pages/HomePage.dart';
+import 'package:financier/Pages/OperationPage.dart';
+import 'package:financier/Pages/ResponsablePage.dart';
 import 'package:flutter/material.dart';
 void main() {
   
@@ -30,6 +35,13 @@ class _MyAppState extends State<MyApp> {
       routes: {
         '/': (context) => HomePage(),
         '/Home': (context) => HomePage(),
+        '/operation':(context) => OperationPage(),
+        '/compte':(context) => ComptePage(),
+        '/responsable':(context) => ResponsablePage(),
+        '/agent':(context) => AgentPage(),
+        '/agence':(context) => AgentPage(),
+        '/credit':(context) => CreditPage()
+
         //'/FoodDetailsPage': (context) => PlatDetailsPage(),
       },
     );
