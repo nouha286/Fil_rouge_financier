@@ -1,5 +1,6 @@
 package com.example.financier.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.Data;
 
@@ -21,6 +22,7 @@ public class Compte implements Serializable {
     private Long id;
     private String referenceCompte;
     @NotBlank(message = "Le titulaire ne peut pas être vide")
+
     @OneToOne
     private Client client;
 
@@ -29,6 +31,7 @@ public class Compte implements Serializable {
    @Valid
     private Double solde;
     private LocalDate dateCreation;
+
     private Etat etat;
 
 

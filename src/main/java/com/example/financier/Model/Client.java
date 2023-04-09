@@ -1,6 +1,7 @@
 package com.example.financier.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.Data;
 
@@ -31,6 +32,7 @@ public class Client {
     private Etat etat;
     @ManyToOne
     @NotNull
+
     private Agence agence;
 
 

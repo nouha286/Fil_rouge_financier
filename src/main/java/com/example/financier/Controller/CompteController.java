@@ -22,6 +22,7 @@ public class CompteController {
     @Autowired
     CompteServiceImpl compteService;
     @GetMapping("/")
+    @ResponseBody
     public ResponseEntity<List<Compte>> getAllComptes() {
         List<Compte> comptes = compteService.getAllComptes();
         return new ResponseEntity<>(comptes, HttpStatus.OK);

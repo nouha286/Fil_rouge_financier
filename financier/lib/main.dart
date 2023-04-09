@@ -4,9 +4,10 @@ import 'package:financier/Pages/CreditPage.dart';
 import 'package:financier/Pages/HomePage.dart';
 import 'package:financier/Pages/OperationPage.dart';
 import 'package:financier/Pages/ResponsablePage.dart';
+import 'package:financier/Service/CompteService.dart';
 import 'package:flutter/material.dart';
+
 void main() {
-  
   runApp(
     MyApp(),
   );
@@ -35,25 +36,22 @@ class _MyAppState extends State<MyApp> {
       routes: {
         '/': (context) => HomePage(),
         '/Home': (context) => HomePage(),
-        '/operation':(context) => OperationPage(),
-        '/compte':(context) => ComptePage(),
-        '/responsable':(context) => ResponsablePage(),
-        '/agent':(context) => AgentPage(),
-        '/agence':(context) => AgentPage(),
-        '/credit':(context) => CreditPage()
+        '/operation': (context) => OperationPage(),
+        '/compte': (context) => ComptePage(),
+        '/responsable': (context) => ResponsablePage(),
+        '/agent': (context) => AgentPage(),
+        '/agence': (context) => AgentPage(),
+        '/credit': (context) => CreditPage()
 
         //'/FoodDetailsPage': (context) => PlatDetailsPage(),
       },
     );
   }
 
- 
-
- 
-
- 
-
   void init() async {
+    CompteService compteService = CompteService();
+
+    
     // await sqlDb.delete();
     // await sqlDb.addData();
     // dynamic t = await getPlat();

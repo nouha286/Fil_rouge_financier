@@ -2,6 +2,11 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 
+import '../Dto/CompteDto.dart';
+import '../Models/Compte.dart';
+import '../Service/CompteService.dart';
+import '../Widgets/CarteCompte.dart';
+
 class ComptePage extends StatefulWidget {
   const ComptePage({super.key});
 
@@ -12,10 +17,11 @@ class ComptePage extends StatefulWidget {
 class _ComptePageState extends State<ComptePage> {
   final _formKey = GlobalKey<FormState>();
   String _nom = "";
-  String _prenom = "";
+  String _metier = "";
   String _email = "";
-  String _telephone = "";
-  double solde = 0.0;
+  String _cne = "";
+  String _adresse = "";
+  double _solde = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -67,16 +73,16 @@ class _ComptePageState extends State<ComptePage> {
                       ),
                       TextFormField(
                         decoration: InputDecoration(
-                          labelText: 'Prénom',
+                          labelText: 'Adresse',
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Le prénom est obligatoire.';
+                            return 'L adresse est obligatoire.';
                           }
                           return null;
                         },
                         onSaved: (value) {
-                          _prenom = value!;
+                          _adresse = value!;
                         },
                       ),
                       TextFormField(
@@ -98,24 +104,63 @@ class _ComptePageState extends State<ComptePage> {
                       ),
                       TextFormField(
                         decoration: InputDecoration(
-                          labelText: 'Téléphone',
+                          labelText: 'CNE',
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Le téléphone est obligatoire.';
+                            return 'Le numéro du carte national d identité est obligatoire.';
                           }
                           return null;
                         },
                         onSaved: (value) {
-                          _telephone = value!;
+                          _cne = value!;
+                        },
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          labelText: 'Solde du compte',
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Le solde est obligatoire.';
+                          }
+                          if (double.tryParse(value) == null) {
+                            return 'Le solde doit être un nombre.';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          _solde = double.parse(value!);
+                        },
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          labelText: 'métier du titulaire',
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'La métier est obligatoire.';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          _metier = value!;
                         },
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 16.0),
                         child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
+                              CompteDto nouveauCompte = CompteDto(
+                                  adresse: _adresse,
+                                  nom: _nom,
+                                  cne: _cne,
+                                  metier: _metier,
+                                  email: _email,
+                                  solde: _solde);
+                              await CompteService.ajouterCompte(nouveauCompte);
                               // Enregistrer le Compte dans la base de données
                               Navigator.pop(context);
                             }
@@ -134,7 +179,40 @@ class _ComptePageState extends State<ComptePage> {
               ),
             ),
             Container(
-              child: Text('hi'),
+              child: FutureBuilder<List<Compte>>(
+                future: CompteService.getComptes(),
+                builder:
+                    (BuildContext ctx, AsyncSnapshot<List<Compte>> snapshot) {
+                  return snapshot.hasData
+                      ? Container(
+                          width: MediaQuery.of(context).size.width,
+                          child: Expanded(
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: (BuildContext context, index) {
+                                final compteList = snapshot.data![index];
+                                return MaterialButton(
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, '/operation');
+                                  },
+                                  child: CarteCompte(
+                                    solde: compteList.solde,
+                                    dateCreation: compteList.dateCreation,
+                                    referenceCompte: compteList.referenceCompte,
+                                    etat: compteList.etat,
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        )
+                      : Center(
+                          child: CircularProgressIndicator(),
+                        );
+                },
+              ),
             )
           ],
         ),

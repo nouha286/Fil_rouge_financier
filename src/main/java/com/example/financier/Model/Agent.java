@@ -9,6 +9,7 @@ import java.util.Collection;
 @Data
 public class Agent extends User {
     private Etat etat;
+
     @ManyToOne
     private Agence agence;
 

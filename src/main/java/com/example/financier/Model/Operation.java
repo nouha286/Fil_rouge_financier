@@ -22,4 +22,6 @@ public class Operation {
     @Enumerated(EnumType.STRING)
     @NotNull
     private Type type;
+    @ManyToOne
+    Compte compte;
 }
