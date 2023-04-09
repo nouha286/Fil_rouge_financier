@@ -1,6 +1,7 @@
 package com.example.financier.Model;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.util.Collection;
 @Entity
 @Data
 @RequiredArgsConstructor
+
 @Inheritance(strategy=InheritanceType.JOINED)
 
 public class User {

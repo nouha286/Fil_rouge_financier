@@ -66,4 +66,24 @@ public class CompteController {
         compteService.deleteCompte(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PutMapping("/{id}/approve")
+    public ResponseEntity<String> approveCompteById(@PathVariable Long id) {
+        Boolean success = compteService.approveCompteById(id);
+        if (success) {
+            return ResponseEntity.ok("Compte approuvé avec succès");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Le compte n'existe pas");
+        }
+    }
+
+    @PutMapping("/{id}/desapprove")
+    public ResponseEntity<String> desapproveCompteById(@PathVariable Long id) {
+        Boolean success = compteService.desapproveCompteById(id);
+        if (success) {
+            return ResponseEntity.ok("Compte désapprouvé avec succès");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Le compte n'existe pas");
+        }
+    }
 }

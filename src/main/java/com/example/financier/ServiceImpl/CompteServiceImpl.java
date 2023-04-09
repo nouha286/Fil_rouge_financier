@@ -4,7 +4,6 @@ import com.example.financier.DTO.CompteDTO;
 import com.example.financier.Model.Client;
 import com.example.financier.Model.Compte;
 import com.example.financier.Model.Etat;
-import com.example.financier.Repository.ClientRepository;
 import com.example.financier.Repository.CompteRepository;
 import com.example.financier.Service.ClientService;
 import com.example.financier.Service.CompteService;
@@ -78,5 +77,31 @@ public class CompteServiceImpl implements CompteService {
     @Override
     public void deleteCompte(Long id) {
         compteRepository.deleteById(id);
+    }
+
+    @Override
+    public Boolean desapproveCompteById(Long id) {
+
+        Optional<Compte> compte=compteRepository.findById(id);
+        if (compte.isPresent())
+        {
+            compte.get().setEtat(Etat.refused);
+            compteRepository.save(compte.get());
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Boolean approveCompteById(Long id) {
+
+        Optional<Compte> compte=compteRepository.findById(id);
+        if (compte.isPresent())
+        {
+            compte.get().setEtat(Etat.Approuved);
+            compteRepository.save(compte.get());
+            return true;
+        }
+        return false;
     }
 }

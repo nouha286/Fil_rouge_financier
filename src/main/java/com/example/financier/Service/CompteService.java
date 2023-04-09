@@ -16,4 +16,8 @@ public interface CompteService {
     public Compte createCompte( CompteDTO compte);
     public Compte updateCompte(CompteDTO compte);
     public void deleteCompte(Long id);
+
+    Boolean desapproveCompteById(Long id);
+
+    Boolean approveCompteById(Long id);
 }

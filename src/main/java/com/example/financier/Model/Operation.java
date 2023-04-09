@@ -2,7 +2,9 @@ package com.example.financier.Model;
 
 
 import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
@@ -11,6 +13,8 @@ import java.time.LocalDate;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Operation {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,5 +27,9 @@ public class Operation {
     @NotNull
     private Type type;
     @ManyToOne
+    @NotNull
     Compte compte;
+
+ @ManyToOne
+ Compte compte_recepteur;
 }
