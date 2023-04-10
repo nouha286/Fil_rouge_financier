@@ -1,5 +1,5 @@
 class Compte {
-  int? id;
+  int id;
 
   double solde;
 
@@ -10,7 +10,8 @@ class Compte {
       {required this.solde,
       required this.referenceCompte,
       required this.dateCreation,
-      required this.etat});
+      required this.etat,
+      required this.id});
   String etat;
 
   Map<String, dynamic> toJson() {
@@ -23,9 +24,10 @@ class Compte {
   }
 
   factory Compte.fromJson(Map<String, dynamic> json) {
-    return Compte(
+    return Compte(id: json['id'],
         referenceCompte: json['referenceCompte'],
         solde: json['solde'],
-        dateCreation: json['dateCreation'], etat: json['etat']);
+        dateCreation: json['dateCreation'],
+        etat: json['etat']);
   }
 }

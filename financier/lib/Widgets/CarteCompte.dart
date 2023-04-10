@@ -1,18 +1,68 @@
+import 'package:financier/Service/CompteService.dart';
 import 'package:flutter/material.dart';
 
-class CarteCompte extends StatelessWidget {
+class CarteCompte extends StatefulWidget {
+  int id;
   double solde;
-
   String referenceCompte;
   String dateCreation;
   String etat;
 
   CarteCompte({
+    required this.id,
     required this.dateCreation,
     required this.referenceCompte,
     required this.solde,
     required this.etat,
   });
+
+  @override
+  _CarteCompteState createState() => _CarteCompteState();
+}
+
+class _CarteCompteState extends State<CarteCompte> {
+  String _buttonText = '';
+
+  Color _color = Colors.green;
+
+  @override
+  void initState() {
+    super.initState();
+    _buttonText = widget.etat == 'Approuved' ? 'Désapprouver' : 'Approuver';
+    if (widget.etat == 'Approuved') {
+      _color = Colors.redAccent;
+    } else
+      _color = Colors.green;
+    ;
+  }
+
+  void _onButtonPressed() {
+    if (widget.etat == 'Approuved') {
+      _desapprouver();
+      Navigator.of(context).pushNamed('/compte');
+      
+    } else {
+      _approuver();
+      Navigator.of(context).pushNamed('/compte');
+    }
+  }
+
+  void _approuver() {
+    setState(() {
+      CompteService.approveCompteById(widget.id);
+      _buttonText = 'Désapprouver';
+      _color = Colors.redAccent;
+      
+    });
+  }
+
+  void _desapprouver() {
+    setState(() {
+      CompteService.desapproveCompteById(widget.id);
+      _buttonText = 'Approuver';
+      _color=Colors.green;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,24 +73,24 @@ class CarteCompte extends StatelessWidget {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.redAccent.withOpacity(0.2), // Couleur de BoxShadow
+              color: Colors.lightBlueAccent.withOpacity(0.2),
               spreadRadius: 5,
               blurRadius: 7,
-              offset: Offset(0, 3), // changement de position de l'ombre
+              offset: Offset(0, 3),
             ),
           ],
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(15),
           border: Border.all(
-            color: Colors.white, // Couleur de bordure
+            color: Colors.white,
           ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ListTile(
-              title: Text(referenceCompte),
-              subtitle: Text(dateCreation),
-              trailing: Text('$solde DH'),
+              title: Text(widget.referenceCompte),
+              subtitle: Text(widget.dateCreation),
+              trailing: Text('${widget.solde} DH'),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
@@ -50,12 +100,27 @@ class CarteCompte extends StatelessWidget {
                   SizedBox(height: 8.0),
                   Text('E-mail: '),
                   SizedBox(height: 8.0),
-                  Text('CNE: $etat'),
+                  Text('CNE: ${widget.etat}'),
                   SizedBox(height: 8.0),
-                  Text('Adresse: $dateCreation'),
+                  Text('Adresse: ${widget.dateCreation}'),
                   SizedBox(height: 8.0),
                 ],
               ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(_color),
+                    ),
+                    onPressed: _onButtonPressed,
+                    child: Text(_buttonText),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

@@ -50,7 +50,7 @@ public class CompteController {
     }
 
 
-    @PutMapping("/{id}")
+    @PutMapping("/")
     public ResponseEntity<Compte> updateCompte( @Valid @RequestBody CompteDTO compte) {
         Optional<Compte> updatedCompte = compteService.getCompteById(compte.getId());
         if (updatedCompte.isPresent()) {

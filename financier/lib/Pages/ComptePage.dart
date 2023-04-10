@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:financier/Pages/OperationPage.dart';
 import 'package:flutter/material.dart';
 
 import '../Dto/CompteDto.dart';
@@ -185,29 +186,33 @@ class _ComptePageState extends State<ComptePage> {
                     (BuildContext ctx, AsyncSnapshot<List<Compte>> snapshot) {
                   return snapshot.hasData
                       ? Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: Expanded(
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              scrollDirection: Axis.vertical,
-                              itemCount: snapshot.data!.length,
-                              itemBuilder: (BuildContext context, index) {
-                                final compteList = snapshot.data![index];
-                                return MaterialButton(
-                                  onPressed: () {
-                                    Navigator.pushNamed(context, '/operation');
+  width: MediaQuery.of(context).size.width,
+  child: ListView.builder(
+    shrinkWrap: true,
+    physics: ClampingScrollPhysics(),
+    scrollDirection: Axis.vertical,
+    itemCount: snapshot.data!.length,
+    itemBuilder: (BuildContext context, index) {
+      final compteList = snapshot.data![index];
+      return MaterialButton(
+          onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => OperationPage(compteId: compteList.id)),
+                                    );
                                   },
-                                  child: CarteCompte(
-                                    solde: compteList.solde,
-                                    dateCreation: compteList.dateCreation,
-                                    referenceCompte: compteList.referenceCompte,
-                                    etat: compteList.etat,
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        )
+        child: CarteCompte(
+          solde: compteList.solde,
+          dateCreation: compteList.dateCreation,
+          referenceCompte: compteList.referenceCompte,
+          etat: compteList.etat,
+           id: compteList.id,
+        ),
+      );
+    },
+  ),
+)
                       : Center(
                           child: CircularProgressIndicator(),
                         );
