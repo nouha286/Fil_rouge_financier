@@ -40,7 +40,6 @@ class _CarteCompteState extends State<CarteCompte> {
     if (widget.etat == 'Approuved') {
       _desapprouver();
       Navigator.of(context).pushNamed('/compte');
-      
     } else {
       _approuver();
       Navigator.of(context).pushNamed('/compte');
@@ -52,7 +51,6 @@ class _CarteCompteState extends State<CarteCompte> {
       CompteService.approveCompteById(widget.id);
       _buttonText = 'Désapprouver';
       _color = Colors.redAccent;
-      
     });
   }
 
@@ -60,7 +58,7 @@ class _CarteCompteState extends State<CarteCompte> {
     setState(() {
       CompteService.desapproveCompteById(widget.id);
       _buttonText = 'Approuver';
-      _color=Colors.green;
+      _color = Colors.green;
     });
   }
 
@@ -88,9 +86,11 @@ class _CarteCompteState extends State<CarteCompte> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ListTile(
-              title: Text(widget.referenceCompte),
-              subtitle: Text(widget.dateCreation),
-              trailing: Text('${widget.solde} DH'),
+              title: Text(
+                'Compte N°: ${widget.referenceCompte}',
+                style: TextStyle(color: Colors.green),
+              ),
+              subtitle: Text('Solde: ${widget.solde} DH'),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
@@ -98,11 +98,11 @@ class _CarteCompteState extends State<CarteCompte> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 8.0),
-                  Text('E-mail: '),
+                  Text('Etat du compte: '),
+                  Text('${widget.etat}',
+                      style: TextStyle(color: Colors.orangeAccent)),
                   SizedBox(height: 8.0),
-                  Text('CNE: ${widget.etat}'),
-                  SizedBox(height: 8.0),
-                  Text('Adresse: ${widget.dateCreation}'),
+                  Text('Date de création de compte: ${widget.dateCreation}'),
                   SizedBox(height: 8.0),
                 ],
               ),
